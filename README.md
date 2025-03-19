@@ -1,3 +1,4 @@
-# EOSC-556-Project
-AEM survey in Western Australia
-Collaborator: Oscar and Thaysa 
+# eosc-556-project
+Title: AEM survey in Western Australia
+
+Collaborators: Oscar and Thaysa 

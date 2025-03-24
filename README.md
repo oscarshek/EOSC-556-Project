@@ -1,6 +1,6 @@
 # eosc-556-project
 ## Title: 
-AEM survey in Western Australia
+Airborne Electromagnetic (AEM) survey in Western Australia
 
 ## Authors: 
 Oscar and Thaysa 
@@ -11,10 +11,10 @@ This project aims to identify any seawater intrusion using airborne electromagne
 ## Data 
 The data used in this project is uploaded in the "release" of this repository. It contains the processed and normalised data along two flight lines (IDs: 101102 and 101201), and waveform details used during the survey for both low monent and high moment transmitter. 
 
-## Content (will add file names and links to the notebooks)
+## Content
 1. [forward_simulation.ipynb](/Notebook/forward_simulation.ipynb): runs forward simulation with different physical inputs and waveforms
 2. [AusAEM_WA.ipynb](/Notebook/AusAEM_WA.ipynb): runs inversion for single station along the flight line 
-3. Inversion for a flight line?
+3. Inversion for a flight line (working on it)
 
 ## Installation: 
 To be able to run the Jupyter notebooks for the project code, 
@@ -27,6 +27,7 @@ c. Activate this conda environment and run JupyterLab to start coding.
 Install Python from Python distribution like miniforge and Anaconda that allow users to install new Python libraries and also create environments. 
 
 Install miniforge: https://github.com/conda-forge/miniforge#install
+
 Install Anaconda: https://docs.anaconda.com/anaconda/install
 
 2. Create project conda environment

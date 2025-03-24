@@ -8,9 +8,12 @@ Oscar and Thaysa
 ## Description: 
 This project aims to identify any seawater intrusion using airborne electromagneitc (AEM) survey in Western Australia region avaliable on https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/146345. Methods including forward simulation and inversion on selected stations and flight paths will be explored. Results will then be cmopared with works done by the Contractor (SkyTEM) and the authority (Geoscience Australia). 
 
-## Content (add names and links to the notebooks)
-1. Forward simulation
-2. Inversion for single station 
+## Data 
+The data used in this project is uploaded in the "release" of this repository. It contains the processed and normalised data along two flight lines (IDs: 101102 and 101201), and waveform details used during the survey for both low monent and high moment transmitter. 
+
+## Content (will add file names and links to the notebooks)
+1. [forward_simulation.ipynb](/Notebook/forward_simulation.ipynb): runs forward simulation with different physical inputs and waveforms
+2. [AusAEM_WA.ipynb](/Notebook/AusAEM_WA.ipynb): runs inversion for single station along the flight line 
 3. Inversion for a flight line?
 
 ## Installation: 
@@ -35,3 +38,6 @@ conda activate environment
 ```
 
 ## References 
+1. Cockett, R., Kang, S., Heagy, L. J., Pidlisecky, A., & Oldenburg, D. W. (2015). SimPEG: An open source framework for simulation and gradient based parameter estimation in geophysical applications. Computers & Geosciences.
+
+2. Lindsey J. Heagy, Rowan Cockett, Seogi Kang, Gudni K. Rosenkjaer, Douglas W. Oldenburg, A framework for simulation and inversion in electromagnetics, Computers & Geosciences, Volume 107, 2017, Pages 1-19, ISSN 0098-3004, http://dx.doi.org/10.1016/j.cageo.2017.06.018.

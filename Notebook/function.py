@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-def read_sounding(flightline, sounding, df, df_all):
+def plot_sounding(flightline, sounding, df, df_all):
     """
-    Function to read and plot the location of selected sounding
+    Function to plot the location of selected sounding
 
     Parameters
     ----------
@@ -17,12 +17,16 @@ def read_sounding(flightline, sounding, df, df_all):
         input value for chosen 101201:
         7420 - 16261 for flight line 101201
 
+    df: pd.dataframe 
+        dataframe contains data from selected flight lines
+
+    df_all: pd.dataframe
+        dataframe contains data from all flight line
+
     Returns
     -------
     plots of chosen flight line and sounding location
     
-    np.ndarray 
-        ????
     """
 
     # define useful dataframe
@@ -67,6 +71,41 @@ def read_sounding(flightline, sounding, df, df_all):
     ax[1].legend()
     plt.tight_layout()
 
-    return station, station_lm_data, station_hm_data, station_lm_std, station_hm_std
+    return
 
+def get_sounding_df(flightline, sounding, df):
+    """
+    Function to extract selected sounding from df
+
+    Parameters
+    ----------
+    flightline: integer
+        input value either 101102 or 101201
+
+    sounding: integer
+        input value for chosen 101102:
+        0 - 7420 
+        input value for chosen 101201:
+        7420 - 16261 for flight line 101201
+        
+    df: pd.dataframe 
+        dataframe contains data from selected flight lines
+    
+    Returns
+    -------
+    pd.dataframe
+
+    np.array
+        LM, HM, LM_std, HM_std
+    
+    """
+
+    #dataframe for the sounding
+    station = df[sounding:sounding+1]
+    station_lm_data = station.iloc[0, 66:84].to_numpy()*1e-12
+    station_hm_data = station.iloc[0, 84:107].to_numpy()*1e-12
+    station_lm_std = station.iloc[0, 148: 166].to_numpy()
+    station_hm_std = station.iloc[0, 166: 189].to_numpy()
+
+    return station, station_lm_data, station_hm_data, station_lm_std, station_hm_std
     

@@ -1,0 +1,60 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def read_sounding(flightline, sounding, df, df_all):
+    """
+    Function to read and plot the location of selected sounding
+
+    Parameters
+    ----------
+    flightline: integer
+        input value either 101102 or 101201
+
+    sounding: integer
+        input value for chosen 101102:
+        0 - 7420 
+        input value for chosen 101201:
+        7420 - 16261 for flight line 101201
+
+    Returns
+    -------
+    plots of chosen flight line and sounding location
+    
+    np.ndarray 
+        ????
+    """
+
+    # define useful dataframe
+    df_selected=df[df["GA_Project"]==flightline]
+    easting = df_selected["Easting"]
+    northing = df_selected["Northing"]
+    # z component Low Moment, High Moment 
+    LM_Z=df_selected.iloc[:, 66:84]*1e-12
+    HM_Z=df_selected.iloc[:, 84:107]*1e-12    
+    # z component relative uncertainty Low Moment, High Moment
+    RUNC_LM_Z=df_selected.iloc[:, 107:125]
+    RUNC_HM_Z=df_selected.iloc[:, 125:148]
+    station = df[sounding:sounding+1]
+    # show selected station
+    plt.scatter(df_all["Easting"], df_all["Northing"], s=0.5)
+    #plt.plot(easting_flightline, northing_flightline, label=str(flightline), c="r")
+    plt.plot(df["Easting"][0:7421], df["Northing"][0:7421], "r", label="101102")
+    plt.plot(df["Easting"][7421:16262], df["Northing"][7421:16262], "orange", label="101201")
+    plt.scatter(station["Easting"], station["Northing"], c="k", marker="*", label=f"Station {sounding}" , s=50)
+    plt.xlabel('Easting (m)')
+    plt.ylabel('Northing (m)')
+    plt.legend()
+    plt.show()
+    # plot the processed data 
+    fig, ax = plt.subplots(1, 2, figsize=(10,4))
+    ax[0].semilogy(easting, LM_Z)
+    ax[0].set_xlabel('Easting (m)')
+    ax[0].set_title('Low Moment')
+    ax[0].axvline(station.iloc[0, 18], c="r", label=f"Station {sounding}")
+    ax[1].semilogy(easting, HM_Z)
+    ax[1].set_xlabel('Easting (m)')
+    ax[1].set_title('High Moment')
+    ax[1].axvline(station.iloc[0, 18], c="r", label=f"Station {sounding}")
+    
+    plt.tight_layout()

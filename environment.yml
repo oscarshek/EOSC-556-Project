@@ -10,4 +10,5 @@ dependencies:
   - matplotlib
   - python=3.11
   - pytest
+  - pandas
 

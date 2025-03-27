@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import warnings
 
 def plot_sounding(flightline, sounding, df, df_all):
     """
@@ -28,6 +29,12 @@ def plot_sounding(flightline, sounding, df, df_all):
     plots of chosen flight line and sounding location
     
     """
+
+
+#    if flightline not in [101102, 101201]:
+#    warnings.warn(
+#        f"The flightline chosen is not selected for this study. Please choose either 101102 or 101201."
+#    )
 
     # define useful dataframe
     df_selected=df[df["GA_Project"]==flightline]

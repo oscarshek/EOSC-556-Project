@@ -82,14 +82,13 @@ def plot_sounding(flightline, sounding, df, df_all):
 
 def get_sounding_df(flightline, sounding, df):
     """
-    Function to extract selected sounding from df
-
+    Function to extract selected sounding(s) from df
+    
     Parameters
     ----------
     flightline: integer
         input value either 101102 or 101201
-
-    sounding: integer
+    sounding: integer or list
         input value for chosen 101102:
         0 - 7420 
         input value for chosen 101201:
@@ -100,19 +99,47 @@ def get_sounding_df(flightline, sounding, df):
     
     Returns
     -------
-    pd.dataframe
-
-    np.array
-        LM, HM, LM_std, HM_std
-    
+    tuple of lists or single value depending on input
     """
-
-    #dataframe for the sounding
-    station = df[sounding:sounding+1]
-    station_lm_data = station.iloc[0, 66:84].to_numpy()*1e-12
-    station_hm_data = station.iloc[0, 84:107].to_numpy()*1e-12
-    station_lm_std = station.iloc[0, 148: 166].to_numpy()
-    station_hm_std = station.iloc[0, 166: 189].to_numpy()
-
-    return station, station_lm_data, station_hm_data, station_lm_std, station_hm_std
+    # Validate flightline
+    if flightline not in [101102, 101201]:
+        raise ValueError(f"Invalid flightline. Choose 101102 or 101201, not {flightline}")
+    
+    # Handle single sounding or list of soundings
+    if isinstance(sounding, (int, np.integer)):
+        # Single sounding case
+        station = df[sounding:sounding+1]
+        station_lm_data = station.iloc[0, 66:84].to_numpy()*1e-12
+        station_hm_data = station.iloc[0, 84:107].to_numpy()*1e-12
+        station_lm_std = station.iloc[0, 148:166].to_numpy()
+        station_hm_std = station.iloc[0, 166:189].to_numpy()
+        return station, station_lm_data, station_hm_data, station_lm_std, station_hm_std
+    
+    elif isinstance(sounding, (list, np.ndarray)):
+        # Multiple soundings case
+        stations = []
+        station_lm_datas = []
+        station_hm_datas = []
+        station_lm_stds = []
+        station_hm_stds = []
+        
+        for sound in sounding:
+            # Extract data for each sounding
+            station = df[sound:sound+1]
+            stations.append(station)
+            
+            station_lm_data = station.iloc[0, 66:84].to_numpy()*1e-12
+            station_hm_data = station.iloc[0, 84:107].to_numpy()*1e-12
+            station_lm_std = station.iloc[0, 148:166].to_numpy()
+            station_hm_std = station.iloc[0, 166:189].to_numpy()
+            
+            station_lm_datas.append(station_lm_data)
+            station_hm_datas.append(station_hm_data)
+            station_lm_stds.append(station_lm_std)
+            station_hm_stds.append(station_hm_std)
+        
+        return stations, station_lm_datas, station_hm_datas, station_lm_stds, station_hm_stds
+    
+    else:
+        raise TypeError("Sounding must be an integer or a list of integers")
     

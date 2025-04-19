@@ -14,7 +14,7 @@ The data used in this project is uploaded in the "release" of this repository. I
 ## Content
 1. [forward_simulation.ipynb](/Notebook/forward_simulation.ipynb): runs forward simulation with different physical inputs and waveforms
 2. [AusAEM_WA.ipynb](/Notebook/AusAEM_WA.ipynb): runs inversion for single station along the flight line 
-3. [AusAEM_WA_Cross_Section.ipynb](/Notebook/AusAEM_WA_Cross_Section.ipynb): Inversion for a flight line (working on it)
+3. [AusAEM_WA_Cross_Section.ipynb](/Notebook/AusAEM_WA_Cross_Section.ipynb): Inversion for a flight line (Preliminary)
 
 ## Installation: 
 To be able to run the Jupyter notebooks for the project code, 
